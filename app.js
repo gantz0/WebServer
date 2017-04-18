@@ -1,5 +1,6 @@
 var express = require('express');
 var session = require('express-session');
+var OrientoStore = require('connect-oriento')(session);
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -10,10 +11,14 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
 app.use(session({
     secret: 'ekzmfhem111!@3#123d',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new OrientoStore ({
+            server: "host=localhost&port=2424&username=root&password=mos0909&db=o2"
+        })
 }));
 
 // view engine setup

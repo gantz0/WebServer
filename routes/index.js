@@ -6,15 +6,20 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/count', function(req,res){
-  if(req.session.count){
-      req.session.count++;
-  }
-  else{
-      req.session.count = 1;
-  }
-  res.send('count : ' + req.session.count);
-});
+ router.get('/welcome', function (req,res) {
+     if(req.session.displayname){
+     res.send(`
+   <h1>WELCOME , ${req.session.displayname}</h1>   
+   `);
+     }
+     else{
+         res.send('No name');
+     }
+ });
+
+ router.get('/auth/logout', function (req, res) {
+    delete req.session.displayname;
+ });
 
 router.post('/auth/login', function (req, res) {
   var user ={
@@ -22,8 +27,11 @@ router.post('/auth/login', function (req, res) {
       password:'1111',
       displayname:'easy'
   };
-    res.send(req.body.userid);
-    req.session.displayname = user.displayname;
+  // 저장된 이후에 함수를 호출해야함.
+    req.session.save(function(){
+        req.session.displayname = user.displayname;
+        res.redirect('/welcome');
+    });
 });
 
 router.get('/auth/login', function (req, res) {
