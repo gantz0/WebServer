@@ -1,9 +1,22 @@
 var express = require('express');
 var router = express.Router();
+var OrientDB =  require('orientjs');
+//router.use(passport.session());
+
+var server = OrientDB({
+    host:       'localhost',
+    port:       2424,
+    username:   'root',
+    password:   'mos0909'
+});
+
+var db = server.use('o2');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  //res.render('index', { title: 'Express' });
+    res.render('index2.html');
 });
 
  router.get('/welcome', function (req,res) {

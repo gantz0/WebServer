@@ -12,6 +12,7 @@ var users = require('./routes/users');
 
 var app = express();
 
+/*
 app.use(session({
     secret: 'ekzmfhem111!@3#123d',
     resave: false,
@@ -19,11 +20,13 @@ app.use(session({
     store: new OrientoStore ({
             server: "host=localhost&port=2424&username=root&password=mos0909&db=o2"
         })
-}));
+}));*/
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+//app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
