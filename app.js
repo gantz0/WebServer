@@ -17,7 +17,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     store: new OrientoStore ({
-            server: "host=localhost&port=2424&username=root&password=mos0909&db=o2"
+            server: "host=localhost&port=2424&username=root&password=mos0909&db=GameServer"
         })
 }));
 
