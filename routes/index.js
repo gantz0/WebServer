@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+
 // var OrientDB =  require('orientjs');
 //router.use(passport.session());
 // var server = OrientDB({
@@ -11,9 +12,11 @@ var router = express.Router();
 //
 // var db = server.use('o2');
 
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('Login.html');
+    res.render('login.html');
 });
 
 
