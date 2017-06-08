@@ -1,29 +1,32 @@
 var express = require('express');
 var session = require('express-session');
-var OrientoStore = require('connect-oriento')(session);
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+// var OrientoStore = require('connect-oriento')(session);
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
 
-app.use(session({
-    secret: 'ekzmfhem111!@3#123d',
-    resave: false,
-    saveUninitialized: true,
-    store: new OrientoStore ({
-            server: "host=localhost&port=2424&username=root&password=mos0909&db=GameServer"
-        })
-}));
+
+// app.use(session({
+//     secret: 'ekzmfhem111!@3#123d',
+//     resave: false,
+//     saveUninitialized: true,
+//     store: new OrientoStore ({
+//             server: "host=localhost&port=2424&username=root&password=mos0909&db=GameServer"
+//         })
+// }));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+//app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
