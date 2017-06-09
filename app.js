@@ -9,17 +9,15 @@ var bodyParser = require('body-parser');
 var app = express();
 
 // var OrientoStore = require('connect-oriento')(session);
-var index = require('./routes/index');
-var users = require('./routes/users')(app);
 
-// app.use(session({
-//     secret: 'ekzmfhem111!@3#123d',
-//     resave: false,
-//     saveUninitialized: true,
-//     store: new OrientoStore ({
-//             server: "host=localhost&port=2424&username=root&password=mos0909&db=GameServer"
-//         })
-// }));
+app.use(session({
+    secret: 'ekzmfhem111!@3#123d',
+    resave: false,
+    saveUninitialized: true,
+    // store: new OrientoStore ({
+    //         server: "host=localhost&port=2424&username=root&password=mos0909&db=GameServer"
+    //     })
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,6 +32,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+var index = require('./routes/index');
+var users = require('./routes/users')(app);
 
 app.use('/', index);
 app.use('/users', users);

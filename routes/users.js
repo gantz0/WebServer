@@ -6,7 +6,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 passport.use(new FacebookStrategy({
         clientID: '830803597083171',
         clientSecret: '7e1dcc226e72cf70aae8701d1644fb71',
-        callbackURL: "http://localhost:3000/user/auth/facebook/callback"
+        callbackURL: "http://localhost:3000/users/auth/facebook/callback"
     },
     function (accessToken, refreshToken, profile, done) {
         console.log(profile);
@@ -24,10 +24,6 @@ passport.deserializeUser(function (user, done) {
     done(null, user);
 });
 
- router.get('/logon/facebook_success', ensureAuthenticated, function (req, res) {
-     res.send('facebook user');
- });
-
 router.get('/login/facebook', passport.authenticate('facebook'));
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
@@ -36,6 +32,17 @@ router.get('/auth/facebook/callback',
     }));
 
 
+router.get('/logon/facebook_success', ensureAuthenticated, function (req, res) {
+    var info = JSON.stringify(req.session);
+    var infojson = JSON.parse(info);
+    console.log("================================================================");
+    console.log(info);
+    console.log("================================================================");
+    console.log(infojson);
+    console.log("================================================================");
+    console.log(infojson.passport['user'].displayName);
+    res.send(infojson.passport['user'].displayName);
+});
 
 router.get('/logon/facebook_fail', ensureAuthenticated, function (req, res) {
     res.send('facebook user');
